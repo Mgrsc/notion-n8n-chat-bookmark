@@ -64,10 +64,12 @@ export function ChatMessage({ message }: ChatMessageProps) {
           className={cn(
             'prose prose-sm max-w-none',
             'prose-p:my-2 prose-p:leading-relaxed',
-            'prose-code:px-1 prose-code:py-0.5 prose-code:rounded',
-            'prose-pre:my-2 prose-pre:bg-gray-900',
+            'prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:break-all',
+            'prose-pre:my-2 prose-pre:bg-gray-900 prose-pre:overflow-x-auto',
+            'prose-pre:break-words [&_pre_code]:break-all [&_pre_code]:whitespace-pre-wrap',
             'prose-headings:mt-4 prose-headings:mb-2',
             'prose-ul:my-2 prose-ol:my-2',
+            'prose-a:break-all',
             isUser && 'prose-a:text-white prose-code:bg-black/10 prose-code:text-white',
             !isUser && 'prose-a:text-emerald-600 prose-code:bg-black/5'
           )}

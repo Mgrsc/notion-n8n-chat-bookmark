@@ -2,15 +2,14 @@
 
 import { useState } from 'react'
 import { MessageCircle } from 'lucide-react'
-import { useAtom, useAtomValue } from 'jotai'
+import { useAtom } from 'jotai'
 import { useSession } from 'next-auth/react'
-import { chatOpenAtom, unreadCountAtom } from '@/store/chat'
+import { chatOpenAtom } from '@/store/chat'
 import { LoginModal } from './login-modal'
 
 export function ChatFab() {
   const [isOpen, setIsOpen] = useAtom(chatOpenAtom)
   const [showLogin, setShowLogin] = useState(false)
-  const unreadCount = useAtomValue(unreadCountAtom)
   const { data: session, status } = useSession()
 
   if (isOpen) return null
@@ -68,21 +67,6 @@ export function ChatFab() {
           strokeWidth={2.5}
           aria-hidden="true"
         />
-
-        {/* 未读角标 */}
-        {unreadCount > 0 && (
-          <span
-            className="absolute -top-1 -right-1
-              size-5 bg-red-500 rounded-full
-              text-white text-xs font-bold
-              flex items-center justify-center
-              animate-bounce
-              ring-2 ring-white"
-            aria-label={`${unreadCount} 条未读消息`}
-          >
-            {unreadCount > 9 ? '9+' : unreadCount}
-          </span>
-        )}
       </button>
 
       {/* 登录模态框 */}

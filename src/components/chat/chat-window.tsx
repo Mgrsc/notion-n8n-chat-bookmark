@@ -8,8 +8,7 @@ import {
   chatOpenAtom,
   messagesAtom,
   isLoadingAtom,
-  sendMessageAtom,
-  markAsReadAtom
+  sendMessageAtom
 } from '@/store/chat'
 import { ChatMessage } from './chat-message'
 
@@ -19,17 +18,9 @@ export function ChatWindow() {
   const messages = useAtomValue(messagesAtom)
   const isLoading = useAtomValue(isLoadingAtom)
   const sendMessage = useSetAtom(sendMessageAtom)
-  const markAsRead = useSetAtom(markAsReadAtom)
 
   const [input, setInput] = useState('')
   const scrollRef = useRef<HTMLDivElement>(null)
-
-  // 窗口打开时标记为已读
-  useEffect(() => {
-    if (isOpen) {
-      markAsRead()
-    }
-  }, [isOpen, markAsRead])
 
   // 自动滚动到底部
   useEffect(() => {
@@ -75,18 +66,18 @@ export function ChatWindow() {
       <header
         className="flex items-center justify-between
           px-4 py-3.5
-          bg-gradient-to-r from-emerald-500 via-green-600 to-teal-600"
+          bg-emerald-50 border-b border-emerald-100"
       >
         <div className="flex items-center gap-2">
           <span
-            className="size-2 bg-emerald-200 rounded-full animate-pulse shadow-sm shadow-emerald-300"
+            className="size-2 bg-emerald-500 rounded-full animate-pulse"
             aria-hidden="true"
           />
-          <span className="text-white font-semibold text-sm">
+          <span className="text-emerald-900 font-semibold text-sm">
             书签助手
           </span>
           {session?.user && (
-            <span className="text-white/90 text-xs font-medium">
+            <span className="text-emerald-700 text-xs font-medium">
               ({session.user.name})
             </span>
           )}
@@ -97,8 +88,8 @@ export function ChatWindow() {
           {session && (
             <button
               onClick={() => signOut()}
-              className="text-white/90 hover:text-white
-                hover:bg-white/20 rounded-lg p-1.5
+              className="text-emerald-700 hover:text-emerald-900
+                hover:bg-emerald-100 rounded-lg p-1.5
                 transition-colors"
               title="退出登录"
             >
@@ -109,8 +100,8 @@ export function ChatWindow() {
           {/* 关闭 */}
           <button
             onClick={() => setIsOpen(false)}
-            className="text-white/90 hover:text-white
-              hover:bg-white/20 rounded-lg p-1.5
+            className="text-emerald-700 hover:text-emerald-900
+              hover:bg-emerald-100 rounded-lg p-1.5
               transition-colors"
             aria-label="关闭聊天"
           >
